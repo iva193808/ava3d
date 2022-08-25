@@ -60,6 +60,9 @@
             BABYLON.SceneLoader.ImportMesh("", "models/", "Stul.babylon", scene, function (mesh) {
             });
             //-----------------GUI ----------------
+                let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);  
+    let loadedGUI = await advancedTexture.parseFromSnippetAsync("#MMWSUI");
+            
             return scene;
         }
         var engine;
