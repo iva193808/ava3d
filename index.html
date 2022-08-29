@@ -64,85 +64,10 @@
    // let loadedGUI = advancedTexture.parseFromURLAsync("https://doc.babylonjs.com/examples/ColorPickerGui.json");
              let loadedGUI = advancedTexture.parseFromSnippetAsync("2V1V3P");
               // Set the ideal W and H if you wish to scale with the window.
-            advancedTexture.idealWidth = 1024;
-            advancedTexture.idealHeight = 1024;
+           // advancedTexture.idealWidth = 1024;
+          //  advancedTexture.idealHeight = 1024;
 
-            //------------First Grid-----------
-            var firstGrid = advancedTexture.getControlByName("firstGrid");
-            firstGrid.isVisible = false;
-
-            // --------TextBlock  "Сведения о модели"
-
-            var nameModelText = advancedTexture.getControlByName("nameModelText");
-            nameModelText.text = "Венский стул";
-            var nameKarksTextureText = advancedTexture.getControlByName("nameKarksTextureText");
-            nameKarksTextureText.text = "Нет текстуры";
-            var nameSidshkTextureText = advancedTexture.getControlByName("nameSidshkTextureText");
-            nameSidshkTextureText.text = "Нет текстуры";
-
-            // --------TextBlock  "Кнопки"
-            var sidshkBtnText = advancedTexture.getControlByName("sidshkBtnText");
-            sidshkBtnText.text = "Сидение";
-            var korpsBtnText = advancedTexture.getControlByName("korpsBtnText");
-            korpsBtnText.text = "Каркас";
-
-            //---------- SLIDERS --------------------
-
-            // --------TextBlock  "Сайдеры"
-            var textAxisX = advancedTexture.getControlByName("textAxisX");
-            textAxisX.text = "Ось X";
-            textAxisX.color = "#fff";
-            var textAxisY = advancedTexture.getControlByName("textAxisY");
-            textAxisY.text = "Ось Y";
-            textAxisY.color = "#fff";
-            var textAxisZoom = advancedTexture.getControlByName("textAxisZoom");
-            textAxisZoom.text = "Масштаб";
-            textAxisZoom.color = "#fff";
-
-            //---------свойства Slider
-            var xSlider = advancedTexture.getControlByName("xSlider");
-            xSlider.color = "#fff";
-            xSlider.barOffset = "8px";
-            xSlider.thumbWidth = "40px";
-            xSlider.background = "#276D39FF";
-
-            var ySlider = advancedTexture.getControlByName("ySlider");
-            ySlider.color = "#fff";
-            ySlider.barOffset = "8px";
-            ySlider.thumbWidth = "40px";
-            ySlider.background = "#276D39FF";
-
-            var zSlider = advancedTexture.getControlByName("zSlider");
-            zSlider.color = "#fff";
-            zSlider.barOffset = "8px";
-            zSlider.thumbWidth = "40px";
-            zSlider.background = "#276D39FF";
-
-            //------------------sidshkTextureGrid---------------------
-
-            var textrBtn01 = advancedTexture.getControlByName("textrBtn01");
-            textrBtn01.height = "95%";
-            textrBtn01.autoScale = true;
-            var imageTextureBtn01 = advancedTexture.getControlByName("imageTextureBtn01");
-
-            
-
-
-            //TODO присвоить текстуру imageTextureBtn01
-            var textrBtn02 = advancedTexture.getControlByName("textrBtn02");
-            textrBtn02.height = "95%";
-            //var imageTextureBtn02 = advancedTexture.getControlByName("imageTextureBtn02");
-            //TODO присвоить текстуру imageTextureBtn02
-
-            var textrBtn03 = advancedTexture.getControlByName("textrBtn03");
-            textrBtn03.height = "95%";
-            //var imageTextureBtn03 = advancedTexture.getControlByName("imageTextureBtn03");
-            //TODO присвоить текстуру imageTextureBtn01
-
-            var textrBtn04 = advancedTexture.getControlByName("textrBtn04");
-            textrBtn04.height = "95%";
-            //var imageTextureBtn04 = advancedTexture.getControlByName("imageTextureBtn04");
-            //TODO присвоить текстуру imageTextureBtn01
+           
 
             return scene;
         }
