@@ -80,7 +80,7 @@
 
             // Load a GUI from the snippet server.
             let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);
-            let loadedGUI = await advancedTexture.parseFromSnippetAsync("2V1V3P#2");
+            let loadedGUI = advancedTexture.parseFromSnippetAsync("2V1V3P#2");
 
             // Set the ideal W and H if you wish to scale with the window.
             advancedTexture.idealWidth = 1024;
