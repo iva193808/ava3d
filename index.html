@@ -87,13 +87,13 @@
             advancedTexture.idealHeight = 1024;
 
             //------------First Grid-----------
-            //let firstGrid = advancedTexture.getControlByName("firstGrid");
-            let firstGrid = loadedGUI.getControlByName("firstGrid");
+            var firstGrid = advancedTexture.getControlByName("firstGrid");
+           
             firstGrid.isVisible = false;
 
             // --------TextBlock  "Сведения о модели"
 
-            var nameModelText = advancedTexture.getControlByName("nameModelText");
+           /* var nameModelText = advancedTexture.getControlByName("nameModelText");
             nameModelText.text = "Венский стул";
             var nameKarksTextureText = advancedTexture.getControlByName("nameKarksTextureText");
             nameKarksTextureText.text = "Нет текстуры";
@@ -162,7 +162,7 @@
             var textrBtn04 = advancedTexture.getControlByName("textrBtn04");
            // textrBtn04.height = "95%";
             //var imageTextureBtn04 = advancedTexture.getControlByName("imageTextureBtn04");
-            //TODO присвоить текстуру imageTextureBtn01
+            //TODO присвоить текстуру imageTextureBtn01 */
 
 
     return scene;
