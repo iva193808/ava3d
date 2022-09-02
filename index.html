@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Babylon.js sample code</title>
+    <title>Babylon.js sample code</title>
 
-        <!-- Babylon.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
-        <script src="https://preview.babylonjs.com/ammo.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/Oimo.js"></script>
-        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <!-- Babylon.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+    <script src="https://preview.babylonjs.com/ammo.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
-    </head>
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
@@ -53,66 +53,239 @@
         var engine = null;
         var scene = null;
         var sceneToRender = null;
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
-    var scene = new BABYLON.Scene(engine);
+            var scene = new BABYLON.Scene(engine);
 
-    //Adding a light
-    var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 10), scene);
-    var light1  = new BABYLON.HemisphericLight ("HemiLight", new BABYLON.Vector3 (0,1,0  ), scene);
+            //Adding a light
+            var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 10), scene);
+            var light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(5, 10, 5), scene);
 
-    //Adding an Arc Rotate Camera
-    var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0.8, 10, BABYLON.Vector3.Zero(), scene);
-    camera.attachControl(canvas, false);
+            //Adding an Arc Rotate Camera
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0.8, 10, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, false);
 
-    // The first parameter can be used to specify which mesh to import. Here we import all meshes
-    const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "scenes/", "Stul001.babylon", scene);
-    
-    // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
-    resultPromise.then((result) => {
-        camera.target = result.meshes[0];
-    })
+            // The first parameter can be used to specify which mesh to import. Here we import all meshes
+            const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "scenes/", "Stul001.babylon", scene);
 
-    // Move the light with the camera
-    scene.registerBeforeRender(function () {
-        light.position = camera.position;
-    });
-//=================GUI==============
+            // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
+            resultPromise.then((result) => {
+                camera.target = result.meshes[0];
+            })
 
-            // Load a GUI from the snippet server.
-            let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);
-            let loadedGUI = await advancedTexture.parseFromSnippetAsync("2V1V3P#2");
+            // Move the light with the camera
+            scene.registerBeforeRender(function () {
+                light.position = camera.position;
+            });
+            //=================GUI==============
 
+            // advancedTexture---
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);
+            
             // Set the ideal W and H if you wish to scale with the window.
             advancedTexture.idealWidth = 1024;
             advancedTexture.idealHeight = 1024;
 
-            //------------First Grid-----------
-           var firstGrid = advancedTexture.getControlByName("firstGrid");
-           firstGrid.isVisible = false;
-            
+            //First Grid---
+            var firstGrid = new BABYLON.GUI.Grid("firstGrid");
+            firstGrid.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            firstGrid.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            firstGrid.width = "90%";
+            firstGrid.height = 0.25;
+            firstGrid.background = "gray";
+            firstGrid.alpha = 0.7;
+            firstGrid.isVisible = false;
+                //Rows and Columns
+            firstGrid.addRowDefinition(0.25);
+            firstGrid.addRowDefinition(0.25);
+            firstGrid.addRowDefinition(0.25);
+            firstGrid.addRowDefinition(0.25);
+            firstGrid.addColumnDefinition(0.5);
+            firstGrid.addColumnDefinition(0.5);
+            advancedTexture.addControl(firstGrid);
 
-    
+            // Текстовые блоки
+            var textAxisX = new BABYLON.GUI.TextBlock("textAxisX");
+            textAxisX.text = "Ось X";
+            textAxisX.color = "white";
+            firstGrid.addControl(textAxisX, 1, 0);
 
-    return scene;
-}
-                window.initFunction = async function() {
-                    
-                    
-                    var asyncEngineCreation = async function() {
-                        try {
-                        return createDefaultEngine();
-                        } catch(e) {
-                        console.log("the available createEngine function failed. Creating the default engine instead");
-                        return createDefaultEngine();
-                        }
-                    }
+            var textAxisY = new BABYLON.GUI.TextBlock("textAxisY");
+            textAxisY.text = "Ось Y";
+            textAxisY.color = "white";
+            firstGrid.addControl(textAxisY, 2, 0);
 
-                    window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createScene();};
-        initFunction().then(() => {sceneToRender = scene                    
+            var textAxisZ = new BABYLON.GUI.TextBlock("textAxisZ");
+            textAxisZ.text = "Ось Z";
+            textAxisZ.color = "white";
+            firstGrid.addControl(textAxisZ, 3, 0);
+
+
+            // Кнопки
+
+            var SidshkBtn = BABYLON.GUI.Button.CreateSimpleButton("SidshkBtn", "Сидение");
+            SidshkBtn.width = 0.4;
+            SidshkBtn.left = "25.30%";
+            SidshkBtn.paddingRight = 0;
+            SidshkBtn.paddingLeft = 0;
+            SidshkBtn.background = "green";
+            SidshkBtn.color = "white";
+            SidshkBtn.alpha = 1.0;
+            firstGrid.addControl(SidshkBtn, 0, 1);
+
+            var karksBtn = BABYLON.GUI.Button.CreateSimpleButton("SidshkBtn", "Каркас");
+            karksBtn.width = 0.4;
+            karksBtn.left ="-21.6%"
+            karksBtn.background = "green";
+            karksBtn.color = "white";
+            karksBtn.alpha = 1.0;
+            firstGrid.addControl(karksBtn, 0, 1);
+
+
+            //----------------------------------------------------------
+            //sidshkTextureGrid---
+            var sidshkTextureGrid = new BABYLON.GUI.Grid("firstGrid");
+            sidshkTextureGrid.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            sidshkTextureGrid.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            sidshkTextureGrid.width = 0.67;
+            sidshkTextureGrid.height = 0.33;
+            sidshkTextureGrid.background = "gray";
+            sidshkTextureGrid.alpha = 0.7;
+            sidshkTextureGrid.isVisible = false;
+            //Rows and Columns
+            sidshkTextureGrid.addRowDefinition(0.4);
+            sidshkTextureGrid.addRowDefinition(0.4);
+            sidshkTextureGrid.addRowDefinition(0.2);
+            sidshkTextureGrid.addColumnDefinition(0.5);
+            sidshkTextureGrid.addColumnDefinition(0.5);
+            advancedTexture.addControl(sidshkTextureGrid);
+
+            // Кнопки          
+            var textrBtn01 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn01", "textures/ikon05.png"
+            );
+            textrBtn01.width = 0.5;
+            textrBtn01.height = 0.9;
+            textrBtn01.left = "10%";
+
+            sidshkTextureGrid.addControl(textrBtn01,0,0);
+
+            var textrBtn02 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn02", "textures/ikon06.png"
+            );
+            textrBtn02.width = 0.5;
+            textrBtn02.height = 0.9;
+            textrBtn02.left = "-10%";
+            sidshkTextureGrid.addControl(textrBtn02, 0, 1);
+
+
+            var textrBtn03 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn03", "textures/ikon07.png"
+            );
+            textrBtn03.width = 0.5;
+            textrBtn03.height = 0.9;
+            textrBtn03.left = "10%";
+            sidshkTextureGrid.addControl(textrBtn03, 1, 0);
+
+
+            var textrBtn04 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn04", "textures/ikon08.png"
+            );
+            textrBtn04.width = 0.5;
+            textrBtn04.height = 0.9;
+            textrBtn04.left = "-10%";
+            sidshkTextureGrid.addControl(textrBtn04, 1, 1);
+
+            var closerBtn = BABYLON.GUI.Button.CreateSimpleButton("closerBtn", "X");
+            closerBtn.width = 0.5;
+            closerBtn.height = 0.9;
+            closerBtn.background = "red";
+            closerBtn.color = "white";
+            closerBtn.left = "-10%";
+            sidshkTextureGrid.addControl(closerBtn, 2, 1);
+
+
+            //----------------------------------------------------------
+            // karksTextureGrid---
+            var karksTextureGrid = new BABYLON.GUI.Grid("firstGrid");
+            karksTextureGrid.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            karksTextureGrid.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            karksTextureGrid.width = 0.67;
+            karksTextureGrid.height = 0.33;
+            karksTextureGrid.background = "gray";
+            karksTextureGrid.alpha = 0.7;
+            karksTextureGrid.isVisible = true;
+            //Rows and Columns
+            karksTextureGrid.addRowDefinition(0.4);
+            karksTextureGrid.addRowDefinition(0.4);
+            karksTextureGrid.addRowDefinition(0.2);
+            karksTextureGrid.addColumnDefinition(0.5);
+            karksTextureGrid.addColumnDefinition(0.5);
+            advancedTexture.addControl(karksTextureGrid);
+            // Кнопки
+            var textrBtn05 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn05", "textures/ikon01.png"
+            );
+            textrBtn05.width = 0.5;
+            textrBtn05.height = 0.9;
+            textrBtn05.left = "10%";
+            karksTextureGrid.addControl(textrBtn05, 0, 0);
+
+            var textrBtn06 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn06", "textures/ikon02.png"
+            );
+            textrBtn06.width = 0.5;
+            textrBtn06.height = 0.9;
+            textrBtn06.left = "-10%";
+            karksTextureGrid.addControl(textrBtn06, 0, 1);
+
+
+            var textrBtn07 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn07", "textures/ikon03.png"
+            );
+            textrBtn07.width = 0.5;
+            textrBtn07.height = 0.9;
+            textrBtn07.left = "10%";
+            karksTextureGrid.addControl(textrBtn07, 1, 0);
+
+            var textrBtn08 = BABYLON.GUI.Button.CreateImageOnlyButton(
+                "textrBtn08", "textures/ikon04.png"
+            );
+
+            textrBtn08.width = 0.5;
+            textrBtn08.height = 0.9;
+            textrBtn08.left = "-10%";
+            karksTextureGrid.addControl(textrBtn08, 1, 1);
+
+            var closerBtn1 = BABYLON.GUI.Button.CreateSimpleButton("closerBtn1", "X");
+            closerBtn1.width = 0.5;
+            closerBtn1.height = 0.9;
+            closerBtn1.background = "red";
+            closerBtn1.color = "white";
+            closerBtn1.left = "-10%";
+            karksTextureGrid.addControl(closerBtn1, 2, 1);
+
+            return scene;
+        }
+        window.initFunction = async function () {
+
+
+            var asyncEngineCreation = async function () {
+                try {
+                    return createDefaultEngine();
+                } catch (e) {
+                    console.log("the available createEngine function failed. Creating the default engine instead");
+                    return createDefaultEngine();
+                }
+            }
+
+            window.engine = await asyncEngineCreation();
+            if (!engine) throw 'engine should not be null.';
+            startRenderLoop(engine, canvas);
+            window.scene = createScene();
+        };
+        initFunction().then(() => {
+            sceneToRender = scene
         });
 
         // Resize
