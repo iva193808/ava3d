@@ -71,13 +71,13 @@
             // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
             resultPromise.then((result) => {
                 camera.target = result.meshes[0];
-            })
+            });
 
             // Move the light with the camera
             scene.registerBeforeRender(function () {
                 light.position = camera.position;
             });
-            //=================GUI==============
+ //=================GUI==============
 
             // advancedTexture---
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);
@@ -85,6 +85,14 @@
             // Set the ideal W and H if you wish to scale with the window.
             advancedTexture.idealWidth = 1024;
             advancedTexture.idealHeight = 1024;
+
+            var editBtn = BABYLON.GUI.Button.CreateSimpleButton("editBtn", "Редактировать");
+            editBtn.width = 0.25;
+            editBtn.height = "40px";
+            editBtn.background = "green";
+            editBtn.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            editBtn.color = "white";
+            advancedTexture.addControl(editBtn);
 
             //First Grid---
             var firstGrid = new BABYLON.GUI.Grid("firstGrid");
@@ -106,19 +114,53 @@
 
             // Текстовые блоки
             var textAxisX = new BABYLON.GUI.TextBlock("textAxisX");
-            textAxisX.text = "Ось X";
+            textAxisX.text = "Ось X. Поворот 0";
             textAxisX.color = "white";
             firstGrid.addControl(textAxisX, 1, 0);
 
             var textAxisY = new BABYLON.GUI.TextBlock("textAxisY");
-            textAxisY.text = "Ось Y";
+            textAxisY.text = "Ось Y. Поворот 0";
             textAxisY.color = "white";
             firstGrid.addControl(textAxisY, 2, 0);
 
             var textAxisZ = new BABYLON.GUI.TextBlock("textAxisZ");
-            textAxisZ.text = "Ось Z";
+            textAxisZ.text = "Ось Z. Поворот 0";
             textAxisZ.color = "white";
             firstGrid.addControl(textAxisZ, 3, 0);
+
+            //Слайдеры
+            var xSlider = new BABYLON.GUI.Slider("xSlider");
+            xSlider.width = 0.9;
+            xSlider.height = 0.7;
+            xSlider.color = "green";
+            xSlider.background = "white";
+            xSlider.barOffset = "6px";
+            xSlider.minimum = 0;
+            xSlider.maximum = 2 * Math.PI;
+            xSlider.value = 0;
+            firstGrid.addControl(xSlider, 1, 1);
+
+            var ySlider = new BABYLON.GUI.Slider("ySlider");
+            ySlider.width = 0.9;
+            ySlider.height = 0.7;
+            ySlider.color = "green";
+            ySlider.background = "white";
+            ySlider.barOffset = "6px";
+            ySlider.minimum = 0;
+            ySlider.maximum = 2 * Math.PI;
+            ySlider.value = 0;
+            firstGrid.addControl(ySlider, 2, 1);
+
+            var zSlider = new BABYLON.GUI.Slider("zSlider");
+            zSlider.width = 0.9;
+            zSlider.height = 0.7;
+            zSlider.color = "green";
+            zSlider.background = "white";
+            zSlider.barOffset = "6px";
+            zSlider.minimum = 0;
+            zSlider.maximum = 2 * Math.PI;
+            zSlider.value = 0;
+            firstGrid.addControl(zSlider, 3, 1);
 
 
             // Кнопки
@@ -131,7 +173,7 @@
             SidshkBtn.background = "green";
             SidshkBtn.color = "white";
             SidshkBtn.alpha = 1.0;
-            firstGrid.addControl(SidshkBtn, 0, 1);
+            firstGrid.addControl(SidshkBtn, 0, 0);
 
             var karksBtn = BABYLON.GUI.Button.CreateSimpleButton("SidshkBtn", "Каркас");
             karksBtn.width = 0.4;
@@ -139,9 +181,13 @@
             karksBtn.background = "green";
             karksBtn.color = "white";
             karksBtn.alpha = 1.0;
-            firstGrid.addControl(karksBtn, 0, 1);
+            firstGrid.addControl(karksBtn, 0, 0);
 
-
+            var closeEditBtn = BABYLON.GUI.Button.CreateSimpleButton("closeEditBtn", "Выйти")
+            closeEditBtn.width = 0.5;
+            closeEditBtn.background = "red";
+            closeEditBtn.color = "white";
+            firstGrid.addControl(closeEditBtn, 0, 1);
             //----------------------------------------------------------
             //sidshkTextureGrid---
             var sidshkTextureGrid = new BABYLON.GUI.Grid("firstGrid");
@@ -214,7 +260,7 @@
             karksTextureGrid.height = 0.33;
             karksTextureGrid.background = "gray";
             karksTextureGrid.alpha = 0.7;
-            karksTextureGrid.isVisible = true;
+            karksTextureGrid.isVisible = false;
             //Rows and Columns
             karksTextureGrid.addRowDefinition(0.4);
             karksTextureGrid.addRowDefinition(0.4);
@@ -264,6 +310,36 @@
             closerBtn1.color = "white";
             closerBtn1.left = "-10%";
             karksTextureGrid.addControl(closerBtn1, 2, 1);
+
+            //-------OBSERWABLE----------
+            //editBtn---
+            editBtn.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = true;
+                editBtn.isVisible = false;
+            });
+
+            //Слайдеры----
+            xSlider.onValueChangedObservable.add(function (value) {
+                textAxisX.text = "Ось X. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
+            //    if (skull) {
+            //        skull.rotation.x = value;
+            //    }
+            });
+
+            ySlider.onValueChangedObservable.add(function (value) {
+                textAxisY.text = "Ось Y. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
+                //    if (skull) {
+                //        skull.rotation.y = value;
+                //    }
+            });
+
+            zSlider.onValueChangedObservable.add(function (value) {
+                textAxisZ.text = "Ось Z. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
+                //    if (skull) {
+                //        skull.rotation.z = value;
+                //    }
+            });
+         
 
             return scene;
         }
