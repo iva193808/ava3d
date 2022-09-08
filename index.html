@@ -157,7 +157,7 @@
             zSlider.color = "green";
             zSlider.background = "white";
             zSlider.barOffset = "6px";
-            zSlider.minimum = 5;
+            zSlider.minimum = 2;
             zSlider.maximum = 10;
             //zSlider.value = 0;
             firstGrid.addControl(zSlider, 3, 1);
@@ -334,7 +334,7 @@
             });
 
             zSlider.onValueChangedObservable.add(function (value) {
-               // textAxisZ.text = "Ось Z. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
+                textAxisZ.text = "Расстояние " + value + ".";
                    if (camera) {
                         camera.radius = value;
                     }
