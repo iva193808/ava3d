@@ -205,6 +205,12 @@
             sidshkTextureGrid.addColumnDefinition(0.5);
             sidshkTextureGrid.addColumnDefinition(0.5);
             advancedTexture.addControl(sidshkTextureGrid);
+            // Текстовые блоки
+            var sidshkTextureNameText = new BABYLON.GUI.TextBlock("name");
+            sidshkTextureNameText.text = "Текстура: ";
+            sidshkTextureNameText.color = "white";
+            sidshkTextureGrid.addControl(sidshkTextureNameText, 2, 0); 
+            //-----------------------------------------------------------
 
             // Кнопки          
             var textrBtn01 = BABYLON.GUI.Button.CreateImageOnlyButton(
@@ -268,6 +274,13 @@
             karksTextureGrid.addColumnDefinition(0.5);
             karksTextureGrid.addColumnDefinition(0.5);
             advancedTexture.addControl(karksTextureGrid);
+            
+            // Текстовые блоки
+            var karksTextureNameText = new BABYLON.GUI.TextBlock();
+            karksTextureNameText.text = "Текстура: ";
+            karksTextureNameText.color = "white";
+            karksTextureGrid.addControl(karksTextureNameText, 2, 0); 
+            
             // Кнопки
             var textrBtn05 = BABYLON.GUI.Button.CreateImageOnlyButton(
                 "textrBtn05", "textures/ikon01.png"
