@@ -157,9 +157,9 @@
             zSlider.color = "green";
             zSlider.background = "white";
             zSlider.barOffset = "6px";
-            zSlider.minimum = 1;
+            zSlider.minimum = 1.75;
             zSlider.maximum = 8;
-            //zSlider.value = 0;
+            zSlider.value = 0;
             firstGrid.addControl(zSlider, 3, 1);
 
 
@@ -317,6 +317,28 @@
                 firstGrid.isVisible = true;
                 editBtn.isVisible = false;
             });
+            //==========firstGrid=============
+                //Кнопки---
+            
+            //closeEditBtn---
+            closeEditBtn.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = false;
+                editBtn.isVisible = true;
+            });
+
+            //SidshkBtn---
+            SidshkBtn.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = false;
+                sidshkTextureGrid.isVisible = true;
+            });
+
+            //karksBtn---
+            karksBtn.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = false;
+                karksTextureGrid.isVisible = true;                             
+            });
+
+            //Слайдеры----
 
             //Слайдеры----
             xSlider.onValueChangedObservable.add(function (value) {
