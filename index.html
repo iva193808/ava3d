@@ -361,6 +361,28 @@
                         camera.radius = value;
                     }
             });
+            
+                        //==========sidshkTextureGrid============
+            //Кнопки---
+           // var sidshkMesh = scene.getMeshByName("sidushka");
+            var sidshkMat = scene.getMaterialByName("PodushkaMat");
+
+            textrBtn01.onPointerClickObservable(() => {
+                var texture01 = new BABYLON.Texture("textures/texture05.png", scene);
+                sidshkMat.albedoTexture = texture01;
+            })
+
+            closeBtn.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = true;
+                sidshkTextureGrid.isVisible = false;
+            });
+
+            //===========karksTextureGrid=============  
+            closeBtn1.onPointerClickObservable.add(() => {
+                firstGrid.isVisible = true;
+                karksTextureGrid.isVisible = false;
+            });
+
          
 
             return scene;
