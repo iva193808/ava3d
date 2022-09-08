@@ -335,9 +335,9 @@
 
             zSlider.onValueChangedObservable.add(function (value) {
                 textAxisZ.text = "Ось Z. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
-                //    if (skull) {
-                //        skull.rotation.z = value;
-                //    }
+                   if (camera) {
+                        camera.radius = value;
+                    }
             });
          
 
