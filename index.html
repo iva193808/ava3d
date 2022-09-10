@@ -80,12 +80,14 @@
             
             //==============MESHES============
             var sidshkMesh = scene.getMeshByName("sidushka");
+            sidshkMesh.position.y = 1;
+
             var karksMesh = scene.getMeshByName("karkas");
             //-----------------------------------------------------------------------
 
             //==============MATERIALS============
             var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
-             karksMesh.material = karkasMat;
+            // karksMesh.material = karkasMat;
             karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             karkasMat.metallic = 0;
             karkasMat.roughness = 1.0;
@@ -93,7 +95,7 @@
            
 
             var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
-             sidshkMesh.material = sidshkMat;
+            // sidshkMesh.material = sidshkMat;
             sidshkMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             sidshkMat.metallic = 0;
             sidshkMat.roughness = 1.0;
