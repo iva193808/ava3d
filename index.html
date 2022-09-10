@@ -430,7 +430,9 @@
             });
 
             //===========karksTextureGrid=============  
-                     karkasMat.baseTexture = new BABYLON.Texture("textures/texture01.png", scene);
+  
+            textrBtn05.onPointerClickObservable.add(() => {
+                karkasMat.baseTexture = new BABYLON.Texture("textures/texture01.png", scene);
                 karksTextureNameText.text = "Текстура: texture01";
             });
 
