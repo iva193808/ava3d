@@ -71,7 +71,10 @@
             // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
             resultPromise.then((result) => {
                 camera.target = result.meshes[0];
-                result.meshes[0].position.y = 1;
+                  //==============MESHES============
+         result.meshes[0].material = karkasMat;
+            //-----------------------------------------------------------------------
+                
             });
 
             // Move the light with the camera
@@ -79,9 +82,7 @@
                 light.position = camera.position;
             });
             
-            //==============MESHES============
-         
-            //-----------------------------------------------------------------------
+          
 
             //==============MATERIALS============
             var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
