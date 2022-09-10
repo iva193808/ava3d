@@ -77,6 +77,28 @@
             scene.registerBeforeRender(function () {
                 light.position = camera.position;
             });
+            
+            //==============MESHES============
+            var sidshkMesh = scene.getMeshByName("sidushka");
+            var karksMesh = scene.getMeshByName("karkas");
+            //-----------------------------------------------------------------------
+
+            //==============MATERIALS============
+            var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
+            karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
+            karkasMat.metallic = 0;
+            karkasMat.roughness = 1.0;
+
+            karksMesh.material = karkasMat;
+
+            var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
+            sidshkMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
+            sidshkMat.metallic = 0;
+            sidshkMat.roughness = 1.0;
+            sidshkMesh.material = sidshkMat;
+
+            //-----------------------------------------------------------------------
+
  //=================GUI==============
 
             // advancedTexture---
