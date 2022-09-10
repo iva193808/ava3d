@@ -85,17 +85,19 @@
 
             //==============MATERIALS============
             var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
+             karksMesh.material = karkasMat;
             karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             karkasMat.metallic = 0;
             karkasMat.roughness = 1.0;
 
-            karksMesh.material = karkasMat;
+           
 
             var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
+             sidshkMesh.material = sidshkMat;
             sidshkMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             sidshkMat.metallic = 0;
             sidshkMat.roughness = 1.0;
-            sidshkMesh.material = sidshkMat;
+           
 
             //-----------------------------------------------------------------------
 
