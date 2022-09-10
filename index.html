@@ -405,7 +405,8 @@
                         //==========sidshkTextureGrid============
             //Кнопки---
            textrBtn01.onPointerClickObservable.add(() => {
-                   sidushkaMat.baseTexture = new BABYLON.Texture("texture05", "textures/texture05.png");
+                               sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture05.png", scene);
+
                 karksTextureNameText.text = "Текстура: texture05";
             });
 
