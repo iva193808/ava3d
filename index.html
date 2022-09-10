@@ -404,12 +404,9 @@
             
                         //==========sidshkTextureGrid============
             //Кнопки---
-           // var sidshkMesh = scene.getMeshByName("sidushka");
-            var sidshkMat = scene.getMaterialByName("PodushkaMat");
-
            textrBtn01.onPointerClickObservable.add(() => {
-                var texture01 = new BABYLON.Texture("textures/texture05.png", scene);
-                sidshkMat.albedoTexture = texture01;
+                   sidushkaMat.baseTexture = new BABYLON.Texture("texture05", "textures/texture05.png");
+                karksTextureNameText.text = "Текстура: texture05";
             });
 
             closeBtn.onPointerClickObservable.add(() => {
