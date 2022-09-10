@@ -405,9 +405,23 @@
                         //==========sidshkTextureGrid============
             //Кнопки---
            textrBtn01.onPointerClickObservable.add(() => {
-                               sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture05.png", scene);
-
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture05.png", scene);
                 karksTextureNameText.text = "Текстура: texture05";
+            });
+            
+              textrBtn02.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture06.png", scene);
+                karksTextureNameText.text = "Текстура: texture06";
+            });
+
+            textrBtn03.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture07.png", scene);
+                karksTextureNameText.text = "Текстура: texture07";
+            });
+
+            textrBtn04.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture08.png", scene);
+                karksTextureNameText.text = "Текстура: texture08";
             });
 
             closeBtn.onPointerClickObservable.add(() => {
@@ -416,6 +430,26 @@
             });
 
             //===========karksTextureGrid=============  
+                     textrBtn05.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture01.png", scene);
+                karksTextureNameText.text = "Текстура: texture01";
+            });
+
+            textrBtn06.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture02.png", scene);
+                karksTextureNameText.text = "Текстура: texture02";
+            });
+
+            textrBtn07.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture03.png", scene);
+                karksTextureNameText.text = "Текстура: texture03";
+            });
+
+            textrBtn08.onPointerClickObservable.add(() => {
+                sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture04.png", scene);
+                karksTextureNameText.text = "Текстура: texture04";
+            });
+            
             closeBtn1.onPointerClickObservable.add(() => {
                 firstGrid.isVisible = true;
                 karksTextureGrid.isVisible = false;
