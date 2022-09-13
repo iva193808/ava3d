@@ -94,10 +94,8 @@
             scene.registerBeforeRender(function () {
                 light.position = camera.position;
             });
-            
-          var environmentTexture = new BABYLON.CubeTexture("textures/environment.env", scene);
-             scene.createDefaultEnvironment(environmentTexture, true);
-            scene.environmentTexture = environmentTexture;
+                   
+            scene.environmentTexture = new BABYLON.CubeTexture("textures/environment.env", scene);
             //-----------------------------------------------------------------------
 
  //=================GUI==============
