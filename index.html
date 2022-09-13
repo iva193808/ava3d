@@ -55,8 +55,7 @@
         var sceneToRender = null;
         var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
-            var scene = new BABYLON.Scene(engine);
-        // var karkasMat = scene.getMaterialByName("Material");
+            var scene = new BABYLON.Scene(engine);    
             //Adding a light
             var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 10), scene);
             var light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(5, 10, 5), scene);
@@ -69,9 +68,7 @@
            karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             karkasMat.metallic = 0;
             karkasMat.roughness = 1.0;
-
-           
-
+          
            var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
            sidushkaMat.baseColor = new BABYLON.Color3(0.94, 0.38, 0.07);
            sidushkaMat.metallic = 0;
@@ -85,8 +82,8 @@
                 camera.target = result.meshes[0];
                   //==============MESHES============
                 //meshes[0] - karkas, meshes[2] - floor, meshes[2] - sidushkaMat.                
-            result.meshes[2].material = karkasMat;
-            result.meshes[0].material = sidushkaMat;
+            result.meshes[1].material = karkasMat;
+            result.meshes[2].material = sidushkaMat;
             //-----------------------------------------------------------------------
                 //============Materials==========        
           //  karkasMat = result.meshes[2].material;
