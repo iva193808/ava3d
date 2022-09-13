@@ -87,19 +87,21 @@
           
 
             //==============MATERIALS============
-            var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
-            
-            karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
-            karkasMat.metallic = 0;
-            karkasMat.roughness = 1.0;
+            //var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
+                        var karkasMat = resultPromise.getMaterialByName("Material");
+
+           // karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
+           // karkasMat.metallic = 0;
+           // karkasMat.roughness = 1.0;
 
            
 
-            var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
-           
-             sidushkaMat.baseColor = new BABYLON.Color3(0.94, 0.38, 0.07);
-             sidushkaMat.metallic = 0;
-             sidushkaMat.roughness = 1.0;
+           // var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
+                       var sidushkaMat = resultPromise.getMaterialByName("Material");
+
+            // sidushkaMat.baseColor = new BABYLON.Color3(0.94, 0.38, 0.07);
+            // sidushkaMat.metallic = 0;
+            // sidushkaMat.roughness = 1.0;
            
 
             //-----------------------------------------------------------------------
