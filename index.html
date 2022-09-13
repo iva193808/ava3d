@@ -94,7 +94,7 @@
             scene.registerBeforeRender(function () {
                 light.position = camera.position;
             });
-                   
+             scene.clearColor = new BABYLON.Color3(0.97, 0.95, 0.97);       
             scene.environmentTexture = new BABYLON.CubeTexture("textures/environment.env", scene);
             //-----------------------------------------------------------------------
 
