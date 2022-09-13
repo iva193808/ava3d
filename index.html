@@ -56,7 +56,7 @@
         var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
             var scene = new BABYLON.Scene(engine);
-         var karkasMat;
+         var karkasMat = scene.getMaterialByName("Material");
             //Adding a light
             var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 10), scene);
             var light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(5, 10, 5), scene);
@@ -78,6 +78,7 @@
             //-----------------------------------------------------------------------
                 //============Materials==========        
             karkasMat = result.meshes[2].material;
+                scene.addMaterial(karkasMat);
             });
             
             // Move the light with the camera
