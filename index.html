@@ -55,64 +55,56 @@
         var sceneToRender = null;
         var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
-            var scene = new BABYLON.Scene(engine);    
-            //Adding a light
+            var scene = new BABYLON.Scene(engine);
+
             var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 10), scene);
             var light1 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(5, 10, 5), scene);
 
-            //Adding an Arc Rotate Camera
             var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0.5, 10, BABYLON.Vector3.Zero(), scene);
             camera.setPosition(new BABYLON.Vector3(1, 1, 2));
-             camera.lowerRadiusLimit = 1.7;
-             camera.upperRadiusLimit = 10;
+            camera.lowerRadiusLimit = 1.7;
+            camera.upperRadiusLimit = 10;
             camera.attachControl(canvas, true);
-   //==============MATERIALS============
-            var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);                       
-           karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
+            //==============MATERIALS============
+            var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
+            karkasMat.baseColor = new BABYLON.Color3(1.0, 0.766, 0.336);
             karkasMat.metallic = 0;
             karkasMat.roughness = 1.0;
-          
-           var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
-           sidushkaMat.baseColor = new BABYLON.Color3(0.94, 0.38, 0.07);
-           sidushkaMat.metallic = 0;
-           sidushkaMat.roughness = 1.0;
-            
-            // The first parameter can be used to specify which mesh to import. Here we import all meshes
+
+            var sidushkaMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrSidshk", scene);
+            sidushkaMat.baseColor = new BABYLON.Color3(0.94, 0.38, 0.07);
+            sidushkaMat.metallic = 0;
+            sidushkaMat.roughness = 1.0;
+
             const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "scenes/", "Stul001.babylon", scene);
 
             // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
             resultPromise.then((result) => {
                 camera.target = result.meshes[0];
-                  //==============MESHES============
-                //meshes[0] - karkas, meshes[2] - floor, meshes[2] - sidushkaMat.                
-            result.meshes[0].material = karkasMat;
-            result.meshes[2].material = sidushkaMat;
-            //-----------------------------------------------------------------------
-                //============Materials==========        
-          //  karkasMat = result.meshes[2].material;
-             //   scene.addMaterial(karkasMat);
+                //==============MESHES============
+                //meshes[0] - karkas, meshes[2] - floor, meshes[2] - sidushkaMat.
+                result.meshes[0].material = karkasMat;
+                result.meshes[2].material = sidushkaMat;
+                //-----------------------------------------------------------------------
             });
-            
+
             // Move the light with the camera
             scene.registerBeforeRender(function () {
                 light.position = camera.position;
             });
-             scene.clearColor = new BABYLON.Color3(0.97, 0.95, 0.97);       
+            scene.clearColor = new BABYLON.Color3(0.97, 0.95, 0.97);
             scene.environmentTexture = new BABYLON.CubeTexture("textures/environment.env", scene);
             //-----------------------------------------------------------------------
 
- //=================GUI==============
+            //=================GUI==============
 
-            // advancedTexture---
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("GUI", true, scene);
-            
-            // Set the ideal W and H if you wish to scale with the window.
             advancedTexture.idealWidth = 1024;
             advancedTexture.idealHeight = 1024;
 
             var editBtn = BABYLON.GUI.Button.CreateSimpleButton("editBtn", "Редактировать");
             editBtn.width = 0.25;
-            editBtn.height = "55px";
+            editBtn.height = "75px";
             editBtn.background = "green";
             editBtn.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
             editBtn.color = "white";
@@ -123,75 +115,22 @@
             firstGrid.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
             firstGrid.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
             firstGrid.width = "90%";
-            firstGrid.height = 0.25;
+            firstGrid.height = 0.12;
             firstGrid.background = "gray";
             firstGrid.alpha = 0.7;
+            firstGrid.fontSize = "4.5%";
             firstGrid.isVisible = false;
-                //Rows and Columns
-            firstGrid.addRowDefinition(0.25);
-            firstGrid.addRowDefinition(0.25);
-            firstGrid.addRowDefinition(0.25);
-            firstGrid.addRowDefinition(0.25);
-            firstGrid.addColumnDefinition(0.5);
-            firstGrid.addColumnDefinition(0.5);
+            //Rows and Columns
+            firstGrid.addRowDefinition(1);          
+            firstGrid.addColumnDefinition(0.3);
+            firstGrid.addColumnDefinition(0.3);
+            firstGrid.addColumnDefinition(0.3);
+
             advancedTexture.addControl(firstGrid);
 
-            // Текстовые блоки
-            var textAxisX = new BABYLON.GUI.TextBlock("textAxisX");
-            textAxisX.text = "Ось X. Поворот 0";
-            textAxisX.color = "white";
-            firstGrid.addControl(textAxisX, 1, 0);
-
-            var textAxisY = new BABYLON.GUI.TextBlock("textAxisY");
-            textAxisY.text = "Ось Y. Расстояние: 0";
-            textAxisY.color = "white";
-            firstGrid.addControl(textAxisY, 2, 0);
-
-            var textAxisZ = new BABYLON.GUI.TextBlock("textAxisZ");
-            textAxisZ.text = "Ось Z. Поворот 0";
-            textAxisZ.color = "white";
-            firstGrid.addControl(textAxisZ, 3, 0);
-
-            //Слайдеры
-            var xSlider = new BABYLON.GUI.Slider("xSlider");
-            xSlider.width = 0.9;
-            xSlider.height = 0.7;
-            xSlider.color = "green";
-            xSlider.background = "white";
-            xSlider.barOffset = "6px";
-            xSlider.minimum = 0;
-            xSlider.maximum = 2 * Math.PI;
-            xSlider.value = 0;
-            firstGrid.addControl(xSlider, 1, 1);
-
-            var ySlider = new BABYLON.GUI.Slider("ySlider");
-            ySlider.width = 0.9;
-            ySlider.height = 0.7;
-            ySlider.color = "green";
-            ySlider.background = "white";
-            ySlider.barOffset = "6px";
-            ySlider.minimum = 0;
-            ySlider.maximum = 2 * Math.PI;
-            ySlider.value = 0;
-            firstGrid.addControl(ySlider, 2, 1);
-
-            var zSlider = new BABYLON.GUI.Slider("zSlider");
-            zSlider.width = 0.9;
-            zSlider.height = 0.7;
-            zSlider.color = "green";
-            zSlider.background = "white";
-            zSlider.barOffset = "6px";
-            zSlider.minimum = 1.7;
-            zSlider.maximum = 10;
-            zSlider.value = 0;
-            firstGrid.addControl(zSlider, 3, 1);
-
-
-            // Кнопки
-
             var SidshkBtn = BABYLON.GUI.Button.CreateSimpleButton("SidshkBtn", "Сидение");
-            SidshkBtn.width = 0.4;
-            SidshkBtn.left = "25.30%";
+            SidshkBtn.width = 0.9;
+            //SidshkBtn.left = "25.30%";
             SidshkBtn.paddingRight = 0;
             SidshkBtn.paddingLeft = 0;
             SidshkBtn.background = "green";
@@ -200,18 +139,18 @@
             firstGrid.addControl(SidshkBtn, 0, 0);
 
             var karksBtn = BABYLON.GUI.Button.CreateSimpleButton("SidshkBtn", "Каркас");
-            karksBtn.width = 0.4;
-            karksBtn.left ="-21.6%"
+            karksBtn.width = 0.9;
+            //karksBtn.left = "-21.6%"
             karksBtn.background = "green";
             karksBtn.color = "white";
             karksBtn.alpha = 1.0;
-            firstGrid.addControl(karksBtn, 0, 0);
+            firstGrid.addControl(karksBtn, 0, 1);
 
-            var closeEditBtn = BABYLON.GUI.Button.CreateSimpleButton("closeEditBtn", "Выйти")
+            var closeEditBtn = BABYLON.GUI.Button.CreateSimpleButton("closeEditBtn", "X")
             closeEditBtn.width = 0.5;
             closeEditBtn.background = "red";
             closeEditBtn.color = "white";
-            firstGrid.addControl(closeEditBtn, 0, 1);
+            firstGrid.addControl(closeEditBtn, 0, 2);
             //----------------------------------------------------------
             //sidshkTextureGrid---
             var sidshkTextureGrid = new BABYLON.GUI.Grid("firstGrid");
@@ -221,6 +160,7 @@
             sidshkTextureGrid.height = 0.33;
             sidshkTextureGrid.background = "gray";
             sidshkTextureGrid.alpha = 0.7;
+            sidshkTextureGrid.fontSize = "2.5%";
             sidshkTextureGrid.isVisible = false;
             //Rows and Columns
             sidshkTextureGrid.addRowDefinition(0.4);
@@ -232,11 +172,12 @@
             // Текстовые блоки
             var sidshkTextureNameText = new BABYLON.GUI.TextBlock("name");
             sidshkTextureNameText.text = "Текстура: ";
+            sidshkTextureNameText.left = 0.2;
             sidshkTextureNameText.color = "white";
-            sidshkTextureGrid.addControl(sidshkTextureNameText, 2, 0); 
+            sidshkTextureGrid.addControl(sidshkTextureNameText, 2, 0);
             //-----------------------------------------------------------
 
-            // Кнопки          
+            // Кнопки
             var textrBtn01 = BABYLON.GUI.Button.CreateImageOnlyButton(
                 "textrBtn01", "textures/ikon05.png"
             );
@@ -244,7 +185,7 @@
             textrBtn01.height = 0.9;
             textrBtn01.left = "10%";
 
-            sidshkTextureGrid.addControl(textrBtn01,0,0);
+            sidshkTextureGrid.addControl(textrBtn01, 0, 0);
 
             var textrBtn02 = BABYLON.GUI.Button.CreateImageOnlyButton(
                 "textrBtn02", "textures/ikon06.png"
@@ -290,6 +231,7 @@
             karksTextureGrid.height = 0.33;
             karksTextureGrid.background = "gray";
             karksTextureGrid.alpha = 0.7;
+            karksTextureGrid.fontSize = "2.5%";
             karksTextureGrid.isVisible = false;
             //Rows and Columns
             karksTextureGrid.addRowDefinition(0.4);
@@ -298,13 +240,13 @@
             karksTextureGrid.addColumnDefinition(0.5);
             karksTextureGrid.addColumnDefinition(0.5);
             advancedTexture.addControl(karksTextureGrid);
-            
+
             // Текстовые блоки
             var karksTextureNameText = new BABYLON.GUI.TextBlock();
             karksTextureNameText.text = "Текстура: ";
             karksTextureNameText.color = "white";
-            karksTextureGrid.addControl(karksTextureNameText, 2, 0); 
-            
+            karksTextureGrid.addControl(karksTextureNameText, 2, 0);
+
             // Кнопки
             var textrBtn05 = BABYLON.GUI.Button.CreateImageOnlyButton(
                 "textrBtn05", "textures/ikon01.png"
@@ -355,8 +297,8 @@
                 editBtn.isVisible = false;
             });
             //==========firstGrid=============
-                //Кнопки---
-            
+            //Кнопки---
+
             //closeEditBtn---
             closeEditBtn.onPointerClickObservable.add(() => {
                 firstGrid.isVisible = false;
@@ -372,41 +314,17 @@
             //karksBtn---
             karksBtn.onPointerClickObservable.add(() => {
                 firstGrid.isVisible = false;
-                karksTextureGrid.isVisible = true;                             
+                karksTextureGrid.isVisible = true;
             });
 
-            //Слайдеры----
+            //===========sidshkTextureGrid=============
 
-            //Слайдеры----
-            xSlider.onValueChangedObservable.add(function (value) {
-                textAxisX.text = "Ось X. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
-           if (camera) {
-            camera.alpha = value;
-        }
-            });
-
-            ySlider.onValueChangedObservable.add(function (value) {
-                textAxisY.text = "Ось Y. Поворот " + (BABYLON.Tools.ToDegrees(value) | 0) + ".";
-                    if (camera) {
-            camera.beta = value;
-        }
-            });
-
-            zSlider.onValueChangedObservable.add(function (value) {
-                textAxisZ.text = "Расстояние " + value + ".";
-                   if (camera) {
-                        camera.radius = value;
-                    }
-            });
-            
-                        //==========sidshkTextureGrid============
-            //Кнопки---
-           textrBtn01.onPointerClickObservable.add(() => {
+            textrBtn01.onPointerClickObservable.add(() => {
                 sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture05.png", scene);
                 sidshkTextureNameText.text = "Текстура: texture05";
             });
-            
-              textrBtn02.onPointerClickObservable.add(() => {
+
+            textrBtn02.onPointerClickObservable.add(() => {
                 sidushkaMat.baseTexture = new BABYLON.Texture("textures/texture06.png", scene);
                 sidshkTextureNameText.text = "Текстура: texture06";
             });
@@ -426,8 +344,8 @@
                 sidshkTextureGrid.isVisible = false;
             });
 
-            //===========karksTextureGrid=============  
-  
+            //===========karksTextureGrid=============
+
             textrBtn05.onPointerClickObservable.add(() => {
                 karkasMat.baseTexture = new BABYLON.Texture("textures/texture01.png", scene);
                 karksTextureNameText.text = "Текстура: texture01";
@@ -447,13 +365,13 @@
                 karkasMat.baseTexture = new BABYLON.Texture("textures/texture04.png", scene);
                 karksTextureNameText.text = "Текстура: texture04";
             });
-            
+
             closeBtn1.onPointerClickObservable.add(() => {
                 firstGrid.isVisible = true;
                 karksTextureGrid.isVisible = false;
             });
 
-         
+
 
             return scene;
         }
