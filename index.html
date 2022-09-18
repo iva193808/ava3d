@@ -64,7 +64,7 @@
             camera.setPosition(new BABYLON.Vector3(1, 1, 2));
             camera.lowerRadiusLimit = 1.7;
             camera.upperRadiusLimit = 10;
-            camera.target = BABYLON.Vector3.Zero();
+            camera.target = new BABYLON.Vector3.Zero();
             camera.attachControl(canvas, true);
             //==============MATERIALS============
             var karkasMat = new BABYLON.PBRMetallicRoughnessMaterial("pbrKarks", scene);
@@ -81,7 +81,7 @@
 
             // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
             resultPromise.then((result) => {
-               // camera.target = result.meshes[0];
+               camera.target = result.meshes[0];
                 //==============MESHES============
                 //meshes[0] - karkas, meshes[2] - floor, meshes[2] - sidushkaMat.
                 result.meshes[0].material = karkasMat;
